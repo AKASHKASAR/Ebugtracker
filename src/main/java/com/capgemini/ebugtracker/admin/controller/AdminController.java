@@ -23,9 +23,9 @@ import com.capgemini.ebugtracker.staff.services.StaffService;
  */
 @RestController
 public class AdminController {
-	@Autowired
+	
 	private BugServices bugservices;
-	@Autowired
+	
 	private StaffService staffservices;
 	
 	
@@ -42,9 +42,7 @@ public class AdminController {
 		
 	}
 	
-	
-	
-	
+		
 	//Get staff details
 	@GetMapping("/getStaffList")
 	public List<Staff> getStaff(Staff staff){
