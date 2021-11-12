@@ -22,7 +22,7 @@ import com.capgemini.ebugtracker.staff.services.StaffService;
  *
  */
 @RestController
-public class AdminController {
+public class AdminController<String> {
 	
 	private BugServices bugservices;
 	
@@ -31,7 +31,7 @@ public class AdminController {
 	
 	@GetMapping("/adminhome")
 	public String adminHome(){
-		return "This is Admin Home Page";
+		return (String) "This is Admin Home Page";
 		
 	}
 	
