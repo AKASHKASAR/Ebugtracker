@@ -18,7 +18,7 @@ import com.capgemini.ebugtracker.staff.entity.Staff;
  *
  */
 @Service
-public abstract class BugSeviceAdmin implements BugServices {
+public class BugSeviceAdmin implements BugServices {
 
 	@Autowired
 	private BugDao bugdao;
@@ -29,18 +29,17 @@ public abstract class BugSeviceAdmin implements BugServices {
 		return bugdao.findAll();
 	}
 
-	public void addBug(Bugs bugs,Staff staff) {
-		// TODO Auto-generated method stub
-		
-		bugdao.save(bugs);
-	}
+
 
 	@Override
 	public List<Bugs> getBugs(String username) {
-		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
+
+	@Override
+	public void addBug(Bugs bugs) {
+
+	}
+
 
 }

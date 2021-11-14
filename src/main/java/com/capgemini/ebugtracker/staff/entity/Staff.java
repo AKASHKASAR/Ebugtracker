@@ -15,8 +15,8 @@ import com.capgemini.ebugtracker.bugs.entity.Bugs;
 public class Staff {
 
 	
-	private String Fname;
-	private String Lname;
+	private String fname;
+	private String lname;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long staffid;
@@ -28,19 +28,19 @@ public class Staff {
 	private List<Bugs> bugs;	
 	
 	public String getFname() {
-		return Fname;
+		return fname;
 	}
 
 	public void setFname(String fname) {
-		Fname = fname;
+		fname = fname;
 	}
 
 	public String getLname() {
-		return Lname;
+		return lname;
 	}
 
 	public void setLname(String lname) {
-		Lname = lname;
+		lname = lname;
 	}
 
 	public Long getStaffid() {
