@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface StaffDao extends JpaRepository<Staff, Long> {
 
-    @Query("Select new com.capgemini.ebugtracker.admin.entity.StaffStatus(s.sataffid,s.fname,s,lanme,b.bugid,b.title) From Staff s JOIN s.bugs b")
-    public List<StaffStatus> getStaffList();
+   // @Query("Select new com.capgemini.ebugtracker.admin.entity.StaffStatus(s.sataffid,s.fname,s,lanme,b.bugid,b.title) From Staff s JOIN s.bugs b")
+    //public List<StaffStatus> getStaffList();
 
 }

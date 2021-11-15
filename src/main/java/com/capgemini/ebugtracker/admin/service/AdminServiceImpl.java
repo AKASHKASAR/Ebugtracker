@@ -6,6 +6,9 @@ import com.capgemini.ebugtracker.bugs.repositery.BugDao;
 import com.capgemini.ebugtracker.mailsender.Mailsender;
 import com.capgemini.ebugtracker.staff.entity.Staff;
 import com.capgemini.ebugtracker.staff.repositery.StaffDao;
+
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,13 +17,14 @@ import org.springframework.stereotype.Service;
  * @author v62
  *
  */
-
+@Service
+@Transactional
 public class AdminServiceImpl implements AdminServices {
 
-   @Autowired
+   
     private BugDao bugdao;
 
-    @Autowired
+    
     private StaffDao staffdao;
     //List<Bugs> list;
 

@@ -1,7 +1,8 @@
-package com.capgemini.ebugtracker.ticket.controller;
+package com.capgemini.ebugtracker.user.controller;
 
-import com.capgemini.ebugtracker.ticket.entity.Ticket;
-import com.capgemini.ebugtracker.ticket.service.TicketService;
+import com.capgemini.ebugtracker.bugs.entity.Bugs;
+import com.capgemini.ebugtracker.bugs.servies.TicketService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,17 +20,17 @@ public class TicketController {
     }
 
     @GetMapping("/getAllTickets")
-    public List<Ticket> getAllTickets(){
+    public List<Bugs> getAllTickets(){
         return ticketService.getAllTickets();
     }
 
     @GetMapping("/getTicket/{ticketId}")
-    public Ticket getTicket(@RequestParam int ticketId){
+    public Bugs getTicket(@RequestParam int ticketId){
         return ticketService.getTicket((long) ticketId);
     }
 
     @PostMapping("/saveTicket")
-    public Ticket saveTicket(@RequestBody Ticket ticket){
-        return ticketService.saveTicket(ticket);
+    public Bugs saveTicket(@RequestBody Bugs bugs){
+        return ticketService.saveTicket(bugs);
     }
 }

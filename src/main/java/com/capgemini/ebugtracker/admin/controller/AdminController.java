@@ -3,32 +3,29 @@
  */
 package com.capgemini.ebugtracker.admin.controller;
 
-import com.capgemini.ebugtracker.admin.entity.StaffStatus;
-import com.capgemini.ebugtracker.admin.service.AdminServices;
-import com.capgemini.ebugtracker.bugs.entity.Bugs;
-import com.capgemini.ebugtracker.bugs.servies.BugServices;
-import com.capgemini.ebugtracker.staff.entity.Staff;
-import com.capgemini.ebugtracker.staff.repositery.StaffDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import com.capgemini.ebugtracker.admin.service.AdminServices;
+import com.capgemini.ebugtracker.bugs.servies.BugServices;
+import com.capgemini.ebugtracker.staff.repositery.StaffDao;
 
 /**
  * @author v62
  *
  */
 @RestController
-public class AdminController<String> {
-    @Autowired
-	private BugServices bugservices;
+public class AdminController {
+   
 	@Autowired
-	private AdminServices adminServices;
+	BugServices bugservices;
 	@Autowired
+	private AdminServices adminservices;
+	
 	private StaffDao staffdao;
 
-	public AdminController() {
-	}
+	
 
 
 	@GetMapping("/adminhome")
@@ -37,34 +34,62 @@ public class AdminController<String> {
 		return string;
 		
 	}
-	
-	//Get new arrived bug details
-	@GetMapping("/getbuglist")
-	public List<Bugs> getBugs(){
-		return this.bugservices.getBugs();
-		
+
+
+
+
+	public BugServices getBugservices() {
+		return bugservices;
 	}
 
 
-	//Get staff details
-	@GetMapping("/getStaffList")
-	public List<StaffStatus> getStaff(){
-		return staffdao.getStaffList();
-		
+
+
+	public void setBugservices(BugServices bugservices) {
+		this.bugservices = bugservices;
+	}
+
+
+
+
+	public AdminServices getAdminServices() {
+		return adminservices;
+	}
+
+
+
+
+	public void setAdminServices(AdminServices adminServices) {
+		this.adminservices = adminServices;
 	}
 	
-	@PostMapping("/addstaff")
-	public Staff addNewStaff(@RequestBody Staff staff){
-		return this.adminServices.addNewStaff(staff);
-		
-	}
-	
-	@PutMapping("/assignbug")
-	public Boolean assignBug( @RequestBody Long bugid, @RequestBody Long staffid ) {
-		adminServices.assignBug(bugid,staffid);
-		return true;
-		
-	}
-	
-	
+//	//Get new arrived bug details
+//	@GetMapping("/getbuglist")
+//	public List<Bugs> getBugs(){
+//		return this.bugservices.getBugs();
+//		
+//	}
+//
+//
+//	//Get staff details
+//	@GetMapping("/getStaffList")
+//	public List<StaffStatus> getStaff(){
+//		return staffdao.getStaffList();
+//		
+//	}
+//	
+//	@PostMapping("/addstaff")
+//	public Staff addNewStaff(@RequestBody Staff staff){
+//		return this.adminServices.addNewStaff(staff);
+//		
+//	}
+//	
+//	@PutMapping("/assignbug")
+//	public Boolean assignBug( @RequestBody Long bugid, @RequestBody Long staffid ) {
+//		adminServices.assignBug(bugid,staffid);
+//		return true;
+//		
+//	}
+//	
+//	
 }
