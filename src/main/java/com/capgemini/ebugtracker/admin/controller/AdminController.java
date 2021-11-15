@@ -3,10 +3,18 @@
  */
 package com.capgemini.ebugtracker.admin.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.capgemini.ebugtracker.bugs.entity.Bugs;
+import com.capgemini.ebugtracker.staff.entity.Staff;
 import com.capgemini.ebugtracker.admin.service.AdminServices;
 import com.capgemini.ebugtracker.bugs.servies.BugServices;
 import com.capgemini.ebugtracker.staff.repositery.StaffDao;
@@ -18,78 +26,61 @@ import com.capgemini.ebugtracker.staff.repositery.StaffDao;
 @RestController
 public class AdminController {
    
-	@Autowired
-	BugServices bugservices;
-	@Autowired
-	private AdminServices adminservices;
-	
-	private StaffDao staffdao;
+	 @Autowired
+		private BugServices bugservices;
+		
+		@Autowired
+		private AdminServices adminServices;
+		@Autowired
+		private StaffDao staffdao;
 
-	
+		
 
 
-	@GetMapping("/adminhome")
-	public String adminHome(){
-		var string = (String) "This is Admin Home Page";
-		return string;
+		@GetMapping("/adminhome")
+		public String adminHome(){
+			var string = (String) "This is Admin Home Page";
+			return string;
+			
+		}
+		
+		//Get new arrived bug details
+	@GetMapping("/pendingbuglist")
+		public List<Bugs> getPendingBugs(){
+		   
+			return  this.bugservices.getPendingBugs();
+			
+		}
+
+	//List of newly created bugs
+	@GetMapping("/newbuglist")
+	public java.util.List<Bugs> getNewBug(){
+		return bugservices.getNewBugs();
 		
 	}
-
-
-
-
-	public BugServices getBugservices() {
-		return bugservices;
-	}
-
-
-
-
-	public void setBugservices(BugServices bugservices) {
-		this.bugservices = bugservices;
-	}
-
-
-
-
-	public AdminServices getAdminServices() {
-		return adminservices;
-	}
-
-
-
-
-	public void setAdminServices(AdminServices adminServices) {
-		this.adminservices = adminServices;
-	}
-	
-//	//Get new arrived bug details
-//	@GetMapping("/getbuglist")
-//	public List<Bugs> getBugs(){
-//		return this.bugservices.getBugs();
-//		
-//	}
-//
-//
-//	//Get staff details
-//	@GetMapping("/getStaffList")
-//	public List<StaffStatus> getStaff(){
-//		return staffdao.getStaffList();
-//		
-//	}
-//	
-//	@PostMapping("/addstaff")
-//	public Staff addNewStaff(@RequestBody Staff staff){
-//		return this.adminServices.addNewStaff(staff);
-//		
-//	}
-//	
-//	@PutMapping("/assignbug")
-//	public Boolean assignBug( @RequestBody Long bugid, @RequestBody Long staffid ) {
-//		adminServices.assignBug(bugid,staffid);
-//		return true;
-//		
-//	}
-//	
-//	
+		//Get list of all the completed bug 
+		@GetMapping("/buglist")
+		public java.util.List<Bugs> getBug(){
+			return bugservices.getBugs();
+			
+		}
+////		Add new staff
+		@PostMapping("/addstaff")
+		public Staff addNewStaff(@RequestBody Staff staff){
+			 this.adminServices.addNewStaff(staff);
+			 return staff;
+			
+		}
+	//	
+		//Assign bug to staff
+		@PutMapping("/assignbug")
+		public Boolean assignBug(@RequestBody Map<String, String>  id ) {
+			String bugid=id.get("bugid");
+			String staffid=id.get("staffid");
+			adminServices.assignBug(Long.parseLong(bugid),Long.parseLong(staffid));
+			return true;
+//			
+		}
+		
+		
 }

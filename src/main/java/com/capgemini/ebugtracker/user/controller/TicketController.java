@@ -11,7 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/tickets")
 public class TicketController {
-
+ 
     private TicketService ticketService;
 
     @Autowired
@@ -25,8 +25,8 @@ public class TicketController {
     }
 
     @GetMapping("/getTicket/{ticketId}")
-    public Bugs getTicket(@RequestParam int ticketId){
-        return ticketService.getTicket((long) ticketId);
+    public Bugs getTicket(@RequestParam String ticketId){
+        return ticketService.getTicket(Long.parseLong(ticketId));
     }
 
     @PostMapping("/saveTicket")

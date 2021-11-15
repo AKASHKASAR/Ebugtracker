@@ -6,8 +6,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 public interface AdminServices {
-    public Staff addNewStaff(@RequestBody Staff staff);
+	public void addNewStaff(@RequestBody Staff staff);
     //public Staff getStaff(Staff staff);
    // public List<StaffStatus> getStaffList();
+   
+    
     public void assignBug(Long bugid,Long staffid);
 }
