@@ -56,9 +56,6 @@ public class Mailsender {
         msg.setText("Hi");
         msg.setText("Username"+username);
         msg.setText("Password"+password);
-
-
-
         javaMailSender.send(msg);
     }
 }

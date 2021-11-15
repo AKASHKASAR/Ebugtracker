@@ -4,6 +4,7 @@ import com.capgemini.ebugtracker.bugs.entity.Bugs;
 import com.capgemini.ebugtracker.bugs.entity.Status;
 import com.capgemini.ebugtracker.bugs.repositery.BugDao;
 import com.capgemini.ebugtracker.mailsender.Mailsender;
+import com.capgemini.ebugtracker.mailsender.RandomUsername;
 import com.capgemini.ebugtracker.staff.entity.Staff;
 import com.capgemini.ebugtracker.staff.repositery.StaffDao;
 
@@ -29,10 +30,8 @@ public class AdminServiceImpl implements AdminServices {
     private StaffDao staffdao;
     //List<Bugs> list;
 
-    static String usingUUID() { 
-        UUID randomUUID = UUID.randomUUID(); 
-        return randomUUID.toString().replaceAll("-", ""); 
-      } 
+    @Autowired
+	RandomUsername rs;
     
     //Add new staff
     @Override
@@ -41,15 +40,17 @@ public class AdminServiceImpl implements AdminServices {
         //save staff detail+
     	String fname=staff.getFname();
     	String lname=staff.getLname();
-    	if(lname.isEmpty()) {
-    		lname="ebug";
-    	}
+//    	if(lname.isEmpty()) {
+//    		lname="ebug";
+//    	}
     	
-    	staff.setUsername(fname.substring(0,3)+lname.substring(0,3));
-    	String randomString = usingUUID(); 
-      //  System.out.println("Random string is: " + randomString); 
-        System.out.println("Random string of 8 characters is: " + randomString.substring(0, 8)); 
-        staff.setPassword(randomString.substring(0, 8));
+    	
+    	//generate username
+    	staff.setUsername(rs.usename(staff.getFname(), staff.getLname()));
+    	
+       
+        //Generate random password
+        staff.setPassword(rs.password(fname, lname));
     	staffdao.save(staff);
     	System.out.println("Staff Saved");
         //staffdao.save(staff);
