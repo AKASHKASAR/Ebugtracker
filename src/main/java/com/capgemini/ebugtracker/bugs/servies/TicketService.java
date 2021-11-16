@@ -29,4 +29,8 @@ public class TicketService {
     public com.capgemini.ebugtracker.bugs.entity.Bugs getTicket(final Long tiketId){
         return ticketRepository.findById(tiketId).get();
     }
+
+    public Bugs getBugForUser(final Long staffid){
+        return ticketRepository.getById(staffid);
+    }
 }
