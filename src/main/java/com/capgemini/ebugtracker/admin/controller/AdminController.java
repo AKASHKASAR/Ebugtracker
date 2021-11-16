@@ -74,11 +74,11 @@ public class AdminController {
 	//	
 		//Assign bug to staff
 		@PutMapping("/assignbug")
-		public Boolean assignBug(@RequestBody Map<String, String>  id ) {
+		public String assignBug(@RequestBody Map<String, String>  id ) {
 			String bugid=id.get("bugid");
 			String staffid=id.get("staffid");
 			adminServices.assignBug(Long.parseLong(bugid),Long.parseLong(staffid));
-			return true;
+			return "assined bug to  staff";
 //			
 		}
 		

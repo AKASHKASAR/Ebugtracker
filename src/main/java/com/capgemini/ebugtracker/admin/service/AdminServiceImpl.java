@@ -5,6 +5,7 @@ import com.capgemini.ebugtracker.bugs.entity.Status;
 import com.capgemini.ebugtracker.bugs.repositery.BugDao;
 import com.capgemini.ebugtracker.mailsender.Mailsender;
 import com.capgemini.ebugtracker.mailsender.RandomUsername;
+import com.capgemini.ebugtracker.staff.controller.StaffController;
 import com.capgemini.ebugtracker.staff.entity.Staff;
 import com.capgemini.ebugtracker.staff.repositery.StaffDao;
 
