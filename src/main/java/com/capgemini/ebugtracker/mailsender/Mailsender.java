@@ -54,8 +54,19 @@ public class Mailsender {
 
         msg.setSubject("E-Bug Tracker System");
         msg.setText("Hi");
-        msg.setText("Username"+username);
-        msg.setText("Password"+password);
+        msg.setText("Username"+username+"\n"+"Password"+password);
+        javaMailSender.send(msg);
+    }
+    
+    public void sendmail(Long bugid) {
+    	SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setFrom(sender_id);
+        msg.setTo(receiver_id);
+
+        msg.setSubject("E-Bug Tracker System");
+        msg.setText("Hi");
+        msg.setText("Ticket Id:"+bugid+"This ticked is resolved succesfuly");
+       
         javaMailSender.send(msg);
     }
 }

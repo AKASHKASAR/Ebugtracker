@@ -17,24 +17,30 @@ public class Customer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long userid;
-	private String uname;
+	private String fname;
+	private String lname;
 	private String emailid;
 	private String password;
 	@OneToMany(targetEntity = Bugs.class,cascade = CascadeType.ALL)
 	@JoinColumn(name="Ticket",referencedColumnName = "userid")
 	private List<Bugs> bugs;
-	
 	public Long getUserid() {
 		return userid;
 	}
 	public void setUserid(Long userid) {
 		this.userid = userid;
 	}
-	public String getUname() {
-		return uname;
+	public String getFname() {
+		return fname;
 	}
-	public void setUname(String uname) {
-		this.uname = uname;
+	public void setFname(String fname) {
+		this.fname = fname;
+	}
+	public String getLname() {
+		return lname;
+	}
+	public void setLname(String lname) {
+		this.lname = lname;
 	}
 	public String getEmailid() {
 		return emailid;
@@ -55,5 +61,5 @@ public class Customer {
 		this.bugs = bugs;
 	}
 	
-
+	
 }

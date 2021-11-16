@@ -11,19 +11,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.ebugtracker.bugs.entity.Bugs;
 import com.capgemini.ebugtracker.staff.entity.Staff;
 import com.capgemini.ebugtracker.admin.service.AdminServices;
 import com.capgemini.ebugtracker.bugs.servies.BugServices;
+import com.capgemini.ebugtracker.mailsender.Mailsender;
 import com.capgemini.ebugtracker.staff.repositery.StaffDao;
+import com.capgemini.ebugtracker.user.entity.Customer;
+import com.capgemini.ebugtracker.user.repositery.UserDao;
 
 /**
  * @author v62
  *
  */
 @RestController
+@RequestMapping("/admin")
 public class AdminController {
    
 	 @Autowired
@@ -33,10 +38,9 @@ public class AdminController {
 		private AdminServices adminServices;
 		@Autowired
 		private StaffDao staffdao;
-
 		
-
-
+		
+		
 		@GetMapping("/adminhome")
 		public String adminHome(){
 			var string = (String) "This is Admin Home Page";
@@ -45,7 +49,7 @@ public class AdminController {
 		}
 		
 		//Get new arrived bug details
-	@GetMapping("/pendingbuglist")
+	@GetMapping("/pendingBugList")
 		public List<Bugs> getPendingBugs(){
 		   
 			return  this.bugservices.getPendingBugs();
@@ -53,19 +57,19 @@ public class AdminController {
 		}
 
 	//List of newly created bugs
-	@GetMapping("/newbuglist")
+	@GetMapping("/newBugList")
 	public java.util.List<Bugs> getNewBug(){
 		return bugservices.getNewBugs();
 		
 	}
 		//Get list of all the completed bug 
-		@GetMapping("/buglist")
+		@GetMapping("/bugList")
 		public java.util.List<Bugs> getBug(){
 			return bugservices.getBugs();
 			
 		}
-////		Add new staff
-		@PostMapping("/addstaff")
+//		Add new staff
+		@PostMapping("/addStaff")
 		public Staff addNewStaff(@RequestBody Staff staff){
 			 this.adminServices.addNewStaff(staff);
 			 return staff;
@@ -81,6 +85,13 @@ public class AdminController {
 			return "assined bug to  staff";
 //			
 		}
-		
+		@GetMapping("/sendMessage")
+		public String sendMesage(@RequestBody Bugs bug) {
+			
+			this.adminServices.sendMessage(bug);
+			
+			return "Message Sent";
+			
+		}
 		
 }

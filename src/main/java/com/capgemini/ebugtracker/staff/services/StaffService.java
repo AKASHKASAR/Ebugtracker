@@ -49,8 +49,6 @@ public class StaffService {
 		adminServices.assignBug(forwardbug.getBugid(),forwardbug.getAssignee_staffid());
 	      
 		// list=bugdao.findById(forwardbug.getAssigner_staffid());
-		
-	
 	}
 
 	

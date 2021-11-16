@@ -8,6 +8,7 @@ import com.capgemini.ebugtracker.mailsender.RandomUsername;
 import com.capgemini.ebugtracker.staff.controller.StaffController;
 import com.capgemini.ebugtracker.staff.entity.Staff;
 import com.capgemini.ebugtracker.staff.repositery.StaffDao;
+import com.capgemini.ebugtracker.user.entity.Customer;
 
 import javax.transaction.Transactional;
 
@@ -56,7 +57,7 @@ public class AdminServiceImpl implements AdminServices {
     	System.out.println("Staff Saved");
         //staffdao.save(staff);
 
-        //send username and password to staff
+       // send username and password to staff
 //        Mailsender ms=new Mailsender();
 //        ms.setReceiver_id(staff.getEmailid());
 //        ms.setUsername(staff.getUsername());
@@ -78,7 +79,14 @@ public class AdminServiceImpl implements AdminServices {
 	}
 
 
-
+public void sendMessage(Bugs bug) {
+	Mailsender ms=new Mailsender();
+   
+       Customer c=bug.getUser();
+       ms.setReceiver_id(c.getEmailid());
+       ms.sendmail(bug.getBugid());
+	
+}
 
 //   @Override
 //   public Staff getStaff(Staff staff) {

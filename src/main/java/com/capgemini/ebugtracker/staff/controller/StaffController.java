@@ -6,15 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.capgemini.ebugtracker.admin.service.AdminServices;
 import com.capgemini.ebugtracker.bugs.entity.Bugs;
 import com.capgemini.ebugtracker.staff.entity.ForwardBug;
 import com.capgemini.ebugtracker.staff.services.StaffService;
 
 @RestController
+@RequestMapping("/staff")
 public class StaffController<String> {
-	
-	//private BugServices bugservices;
+	@Autowired
+	private AdminServices adminservices;
 	@Autowired
 	private StaffService staffservices;
 	
@@ -35,13 +39,22 @@ public class StaffController<String> {
 	//Send three ids currentstaffid, bugid and staffid
 	@PutMapping("/forwardBug")
 	public void forwardBug(@RequestBody ForwardBug forwordbug ){
-//		Long currentstaffid=Long.parseLong((java.lang.String) id.get("currentstaffId"));
-//		Long bugid=Long.parseLong((java.lang.String) id.get("bugid"));
-//		Long staffid=Long.parseLong((java.lang.String) id.get("staffId"));
 		staffservices.forwardBug(forwordbug);
 		//staffservices.forwardBug(Long.parseLong(bugid),Long.parseLong(staffid));
 		
 	}
+	
+	
+	@GetMapping("/sendMessage")
+	public String sendMesage(@RequestBody Bugs bug) {
+		
+		this.adminservices.sendMessage(bug);
+		
+		return (String) "Message Sent";
+		
+	}
+	
+	
 	
 	
 }

@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 
 import com.capgemini.ebugtracker.staff.entity.Staff;
 import com.capgemini.ebugtracker.user.entity.Customer;
@@ -20,11 +21,13 @@ import com.capgemini.ebugtracker.user.entity.Customer;
  *
  */
 @Entity
+// Define a sequence - might also be in another class:
+@SequenceGenerator(name="seq", initialValue=10001)
 public class Bugs {
 	
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
 	private Long bugid;
 	public Long getBugid() {
 		return bugid;
