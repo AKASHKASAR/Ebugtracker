@@ -10,6 +10,7 @@ import com.capgemini.ebugtracker.staff.entity.Staff;
 import com.capgemini.ebugtracker.staff.repositery.StaffDao;
 import com.capgemini.ebugtracker.user.entity.Customer;
 
+import javax.mail.MessagingException;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ public class AdminServiceImpl implements AdminServices {
     
     //Add new staff
     @Override
-    public void addNewStaff(Staff staff) {
+    public void addNewStaff(Staff staff) throws MessagingException {
         // TODO Auto-generated method stub
         //save staff detail+
     	String fname=staff.getFname();
@@ -58,11 +59,11 @@ public class AdminServiceImpl implements AdminServices {
         //staffdao.save(staff);
 
        // send username and password to staff
-//        Mailsender ms=new Mailsender();
-//        ms.setReceiver_id(staff.getEmailid());
-//        ms.setUsername(staff.getUsername());
-//        ms.setPassword(staff.getPassword());
-//        ms.sendmail();
+       Mailsender ms=new Mailsender();
+        ms.setReceiver_id(staff.getEmailid());
+        ms.setUsername(staff.getUsername());
+        ms.setPassword(staff.getPassword());
+        ms.sendmail();
 
        
     }
