@@ -1,10 +1,19 @@
 package com.capgemini.ebugtracker.mailsender;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 public class Mailsender {
 
     private String sender_id="viajyalaxmi.joshi8@gmail.com";
+    private String receiver_id;
+    private String username;
+    private String password;
+    @Autowired
+    public JavaMailSender javaMailSender;
 
     public String getReceiver_id() {
         return receiver_id;
@@ -14,11 +23,7 @@ public class Mailsender {
         this.receiver_id = receiver_id;
     }
 
-    private String receiver_id;
-    private String username;
-    private String password;
-    @Autowired
-    public JavaMailSender javaMailSender;
+    
 
     public String getSender_id() {
         return sender_id;
@@ -46,15 +51,16 @@ public class Mailsender {
 
 
 
-    public void sendmail(){
-        SimpleMailMessage msg = new SimpleMailMessage();
+    public void sendmail() throws MessagingException{
+        MimeMessage mimemsg = javaMailSender.createMimeMessage();
+        MimeMessageHelper msg=new MimeMessageHelper(mimemsg,true);
         msg.setFrom(sender_id);
         msg.setTo(receiver_id);
 
         msg.setSubject("E-Bug Tracker System");
         msg.setText("Hi");
         msg.setText("Username"+username+"\n"+"Password"+password);
-        javaMailSender.send(msg);
+        javaMailSender.send(mimemsg);
     }
     
     public void sendmail(Long bugid) {

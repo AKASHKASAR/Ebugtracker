@@ -2,6 +2,7 @@ package com.capgemini.ebugtracker.user.controller;
 
 import com.capgemini.ebugtracker.bugs.entity.Bugs;
 import com.capgemini.ebugtracker.bugs.servies.TicketService;
+import com.capgemini.ebugtracker.exception.BugNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,13 @@ public class TicketController {
 
     @GetMapping("/getTicket/{ticketId}")
     public Bugs getTicket(@PathVariable("ticketId") String ticketId){
+    	try {
         return ticketService.getTicket(Long.parseLong(ticketId));
+    	}catch(BugNotFoundException e){
+    		e.getMessage();
+    		return null;
+    	}
+		
     }
 
     @GetMapping("/getTicketForStaff/{userId}")
