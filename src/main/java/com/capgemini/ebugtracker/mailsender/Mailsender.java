@@ -2,7 +2,6 @@ package com.capgemini.ebugtracker.mailsender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import com.capgemini.ebugtracker.staff.entity.Staff;
 public class Mailsender {
 
     private String sender_id="viajyalaxmi.joshi8@gmail.com";

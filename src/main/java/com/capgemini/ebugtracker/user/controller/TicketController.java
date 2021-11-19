@@ -25,7 +25,7 @@ public class TicketController {
     }
 
     @GetMapping("/getTicket/{ticketId}")
-    public Bugs getTicket(@PathVariable String ticketId){
+    public Bugs getTicket(@PathVariable("ticketId") String ticketId){
         return ticketService.getTicket(Long.parseLong(ticketId));
     }
 

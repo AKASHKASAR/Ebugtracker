@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,8 +31,8 @@ public class StaffController<String> {
 	}
 	
 	//Get all assigned bug details
-	@GetMapping("/allAssignedBug")
-	public List<Bugs> getBugs(@RequestBody Long staffid){
+	@GetMapping("/allAssignedBug/{staffId}")
+	public List<Bugs> getBugs(@PathVariable("staffId") Long staffid){
 		return this.staffservices.getBugs(staffid);
 		
 	}
