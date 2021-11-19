@@ -85,7 +85,7 @@ public class AdminController {
 			return "assined bug to  staff";
 //			
 		}
-		@GetMapping("/sendMessage")
+		@PostMapping("/sendMessage")
 		public String sendMesage(@RequestBody Bugs bug) {
 			
 			this.adminServices.sendMessage(bug);
