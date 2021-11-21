@@ -29,6 +29,7 @@ public class Bugs {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
 	private Long bugid;
+	private String image;
 	public Long getBugid() {
 		return bugid;
 	}
@@ -91,6 +92,14 @@ public class Bugs {
 
 	public void setStaff(Staff staff) {
 		this.staff = staff;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	private String title;

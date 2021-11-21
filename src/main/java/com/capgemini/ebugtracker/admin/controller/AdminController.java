@@ -23,6 +23,8 @@ import com.capgemini.ebugtracker.staff.repositery.StaffDao;
 import com.capgemini.ebugtracker.user.entity.Customer;
 import com.capgemini.ebugtracker.user.repositery.UserDao;
 
+import javax.mail.MessagingException;
+
 /**
  * @author v62
  *
@@ -71,8 +73,12 @@ public class AdminController {
 //		Add new staff
 		@PostMapping("/addStaff")
 		public Staff addNewStaff(@RequestBody Staff staff){
-			 this.adminServices.addNewStaff(staff);
-			 return staff;
+			try {
+				this.adminServices.addNewStaff(staff);
+			} catch (MessagingException e) {
+				e.printStackTrace();
+			}
+			return staff;
 			
 		}
 	//	

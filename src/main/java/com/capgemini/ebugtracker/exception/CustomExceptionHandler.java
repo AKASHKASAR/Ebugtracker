@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
@@ -40,8 +41,23 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 	}
 	
 	@ExceptionHandler(BugNotFoundException.class)
-	public final ResponseEntity<Object> handleCourseNotFoundException() {
-		LOG.error("handleBugnotFoundException");
-		return new ResponseEntity<Object>("Bug Not Found", HttpStatus.NOT_FOUND);
+	public final ResponseEntity<Object> handleBugNotFoundException() {
+		LOG.error("Bug Not Found");
+		return new ResponseEntity<Object>(buildErrorMessge("BUG_NOT_FOUND",
+				"Bug not found"), HttpStatus.NOT_FOUND);
+	}
+
+	@ExceptionHandler(Exception.class)
+	public final ResponseEntity<Object> handleException() {
+		LOG.error("Unknown Exception occurred");
+		return new ResponseEntity<Object>(buildErrorMessge("INTERNAL_SERVER_ERROR",
+				"Something went wrong, please try after some time"), HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	private ErrorMessge buildErrorMessge(String errorCode, String errorMessage){
+		ErrorMessge errorMessge = new ErrorMessge();
+		errorMessge.setErrorCode(errorCode);
+		errorMessge.setErrorMessage(errorMessage);
+		return errorMessge;
 	}
 }
