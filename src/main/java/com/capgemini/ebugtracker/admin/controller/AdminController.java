@@ -3,27 +3,16 @@
  */
 package com.capgemini.ebugtracker.admin.controller;
 
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.capgemini.ebugtracker.bugs.entity.Bugs;
-import com.capgemini.ebugtracker.staff.entity.Staff;
 import com.capgemini.ebugtracker.admin.service.AdminServices;
+import com.capgemini.ebugtracker.bugs.entity.Bugs;
 import com.capgemini.ebugtracker.bugs.servies.BugServices;
-import com.capgemini.ebugtracker.mailsender.Mailsender;
-import com.capgemini.ebugtracker.staff.repositery.StaffDao;
-import com.capgemini.ebugtracker.user.entity.Customer;
-import com.capgemini.ebugtracker.user.repositery.UserDao;
+import com.capgemini.ebugtracker.staff.entity.Staff;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author v62
@@ -38,20 +27,19 @@ public class AdminController {
 		
 		@Autowired
 		private AdminServices adminServices;
-		@Autowired
-		private StaffDao staffdao;
-		
-		
+//		@Autowired
+//		private StaffDao staffdao;
+//
+
 		
 		@GetMapping("/adminhome")
 		public String adminHome(){
-			var string = (String) "This is Admin Home Page";
-			return string;
+			return "Tis is Home Admin Homepage";
 			
 		}
 		
 		//Get new arrived bug details
-	@GetMapping("/pendingBugList")
+		@GetMapping("/pendingBugList")
 		public List<Bugs> getPendingBugs(){
 		   
 			return  this.bugservices.getPendingBugs();
@@ -72,31 +60,32 @@ public class AdminController {
 		}
 //		Add new staff
 		@PostMapping("/addStaff")
-		public Staff addNewStaff(@RequestBody Staff staff){
+		public Staff addNewStaff(@RequestBody Staff staff) throws MessagingException {
+			this.adminServices.addNewStaff(staff);
 			try {
-				this.adminServices.addNewStaff(staff);
-			} catch (MessagingException e) {
-				e.printStackTrace();
+					this.adminServices.addNewStaff(staff);
+				} catch (MessagingException e) {
+					e.printStackTrace();
+				}
+				return staff;
 			}
-			return staff;
-			
-		}
-	//	
-		//Assign bug to staff
-		@PutMapping("/assignbug")
-		public String assignBug(@RequestBody Map<String, String>  id ) {
-			String bugid=id.get("bugid");
-			String staffid=id.get("staffid");
-			adminServices.assignBug(Long.parseLong(bugid),Long.parseLong(staffid));
-			return "assined bug to  staff";
+
+
+			//Assign bug to staff
+			@PutMapping("/assignbug")
+			public String assignBug(@RequestBody Map < String, String > id ){
+				String bugid = id.get("bugid");
+				String staffid = id.get("staffid");
+				adminServices.assignBug(Long.parseLong(bugid), Long.parseLong(staffid));
+				return "Bug is assigned to staff";
 //			
 		}
 		@PostMapping("/sendMessage")
-		public String sendMesage(@RequestBody Bugs bug) {
+		public String sendMessage(@RequestBody Bugs bug) {
 			
 			this.adminServices.sendMessage(bug);
 			
-			return "Message Sent";
+			return "Message Sent to Customer";
 			
 		}
 		

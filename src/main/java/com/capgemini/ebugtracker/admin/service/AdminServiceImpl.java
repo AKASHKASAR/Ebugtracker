@@ -11,9 +11,12 @@ import com.capgemini.ebugtracker.staff.repositery.StaffDao;
 import com.capgemini.ebugtracker.user.entity.Customer;
 
 import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 
@@ -36,6 +39,8 @@ public class AdminServiceImpl implements AdminServices {
     @Autowired
 	RandomUsername rs;
     
+    @Autowired
+    private JavaMailSender javaMailSender;
     //Add new staff
     @Override
     public void addNewStaff(Staff staff) throws MessagingException {
@@ -59,11 +64,20 @@ public class AdminServiceImpl implements AdminServices {
         //staffdao.save(staff);
 
        // send username and password to staff
-       Mailsender ms=new Mailsender();
-        ms.setReceiver_id(staff.getEmailid());
-        ms.setUsername(staff.getUsername());
-        ms.setPassword(staff.getPassword());
-        ms.sendmail();
+      // Mailsender ms=new Mailsender();
+        //ms.setReceiver_id(staff.getEmailid());
+        //ms.setUsername(staff.getUsername());
+        //ms.setPassword(staff.getPassword());
+    	 MimeMessage mimemsg = javaMailSender.createMimeMessage();
+         MimeMessageHelper msg=new MimeMessageHelper(mimemsg,true);
+         msg.setFrom("vijaylaxmi.joshi8@gmail.com");
+         msg.setTo(staff.getEmailid());
+
+         msg.setSubject("E-Bug Tracker System");
+         msg.setText("Hi");
+         msg.setText("Username"+staff.getUsername()+"\n"+"Password"+staff.getPassword());
+         javaMailSender.send(mimemsg);
+        //ms.sendmail();
 
        
     }

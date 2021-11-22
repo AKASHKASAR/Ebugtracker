@@ -53,11 +53,11 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<Object>(buildErrorMessge("INTERNAL_SERVER_ERROR",
 				"Something went wrong, please try after some time"), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-
-	private ErrorMessge buildErrorMessge(String errorCode, String errorMessage){
-		ErrorMessge errorMessge = new ErrorMessge();
-		errorMessge.setErrorCode(errorCode);
-		errorMessge.setErrorMessage(errorMessage);
-		return errorMessge;
-	}
+//
+//	private ErrorMessge buildErrorMessge(String errorCode, String errorMessage){
+//		ErrorMessge errorMessge = new ErrorMessge();
+//		errorMessge.setErrorCode(errorCode);
+//		errorMessge.setErrorMessage(errorMessage);
+//		return errorMessge;
+//	}
 }
