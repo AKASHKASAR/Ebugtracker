@@ -33,7 +33,7 @@ public class StaffController<String> {
 	private StaffDao staffdao;
 	
 	@PostMapping("/login")
-    public Status loginUser(@Validated @RequestBody Staff staff) {
+    public Status loginStaff(@Validated @RequestBody Staff staff) {
         List<Staff> stafflist = staffdao.findAll();
         for (Staff other : stafflist) {
             if (other.getUsername().equals(staff.getUsername()) && other.getPassword().equals(staff.getPassword())) {
