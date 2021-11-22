@@ -18,6 +18,8 @@ import java.util.Map;
  * @author v62
  *
  */
+
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
