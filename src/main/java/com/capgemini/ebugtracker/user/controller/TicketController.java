@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/tickets")
@@ -27,13 +28,11 @@ public class TicketController {
 
     @GetMapping("/getTicket/{ticketId}")
     public Bugs getTicket(@PathVariable("ticketId") String ticketId){
-    	try {
-        return ticketService.getTicket(Long.parseLong(ticketId));
-    	}catch(BugNotFoundException e){
-    		e.getMessage();
-    		return null;
-    	}
-		
+        Bugs bugs = ticketService.getTicket(Long.parseLong(ticketId));
+        if(Objects.isNull(bugs)){
+            throw new BugNotFoundException();
+        }
+    	return bugs;
     }
 
     @GetMapping("/getTicketForStaff/{userId}")
@@ -45,4 +44,11 @@ public class TicketController {
     public Bugs saveTicket(@RequestBody Bugs bugs){
         return ticketService.saveTicket(bugs);
     }
+
+    /*@PostMapping ("/uploadImage")
+    public String uploadImage(RequestParam("imagefile")multipartfile imagefile){
+        String returnvalue = "start";
+TicketService.saveImage(imagefile);
+        return returnvalue;
+    }*/
 }
