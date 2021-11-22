@@ -2,6 +2,8 @@ package com.capgemini.ebugtracker.staff.controller;
 
 import java.util.List;
 
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -64,12 +66,10 @@ public class StaffController<String> {
 	}
 	
 	@GetMapping("/resolveBug/{bugId}")
-	public String resolveBug(@PathVariable("bugId") Long bugid){
-		Bugs bug=bugdao.getById(bugid);
-		bug.setStatus(Status.COMPLETED);
-		bugdao.save(bug);
+	public String resolveBug(@PathVariable("bugId") Long bugid) throws MessagingException{
 		
-		return (String) "Bug resolved Successfully";
+				
+		return (String) staffservices.resolveBug(bugid);
 		
 	}
 	
@@ -83,14 +83,7 @@ public class StaffController<String> {
 	}
 	
 	
-	@GetMapping("/sendMessage")
-	public String sendMesage(@RequestBody Bugs bug) {
-		
-		this.adminservices.sendMessage(bug);
-		
-		return (String) "Message Sent";
-		
-	}
+	
 	
 	
 	
