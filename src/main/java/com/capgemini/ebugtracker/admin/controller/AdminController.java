@@ -6,6 +6,8 @@ package com.capgemini.ebugtracker.admin.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,6 +43,11 @@ public class AdminController {
 		
 		
 		
+		
+		
+		
+		
+		
 		@GetMapping("/adminhome")
 		public String adminHome(){
 			var string = (String) "This is Admin Home Page";
@@ -70,7 +77,7 @@ public class AdminController {
 		}
 //		Add new staff
 		@PostMapping("/addStaff")
-		public Staff addNewStaff(@RequestBody Staff staff){
+		public Staff addNewStaff(@RequestBody Staff staff) throws MessagingException{
 			 this.adminServices.addNewStaff(staff);
 			 return staff;
 			
