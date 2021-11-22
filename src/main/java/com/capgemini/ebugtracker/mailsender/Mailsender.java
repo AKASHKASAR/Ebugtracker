@@ -73,7 +73,7 @@ public class Mailsender {
 
         msg.setSubject("E-Bug Tracker System");
         msg.setText("Hi");
-        msg.setText("Ticket Id:"+bugid+"This ticked is resolved succesfuly");
+        msg.setText("Ticket Id:"+bugid+"This ticket is resolved succesfuly");
        
         javaMailSender.send(msg);
     }
