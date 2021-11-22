@@ -37,7 +37,7 @@ public class UserService {
 			// TODO Auto-generated method stub
 			 List<Customer> userlist = CustomerRepository.findAll();
 		        for (Customer other : userlist) {
-		            if (other.getUserid().equals(customer.getUsername()) && other.getPassword().equals(customer.getPassword())) {
+		            if (other.getUsername().equals(customer.getUsername()) && other.getPassword().equals(customer.getPassword())) {
 		              //  staff.setLoggedIn(true);
 		               // staffdao.save(staff);
 		                return StatusLogin.SUCCESS;
