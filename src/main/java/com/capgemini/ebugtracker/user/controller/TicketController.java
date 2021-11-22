@@ -65,12 +65,7 @@ TicketService.saveImage(imagefile);
     }*/
     
     
-    @PostMapping("/login")
-    public StatusLogin loginUser(@Validated @RequestBody Customer customer) {
-    	return userservice.Login(customer);
-    	
-       
-    }
+    
     
     
     
