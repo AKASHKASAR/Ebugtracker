@@ -8,6 +8,7 @@ import com.capgemini.ebugtracker.staff.entity.StatusLogin;
 import com.capgemini.ebugtracker.staff.repositery.StaffDao;
 import com.capgemini.ebugtracker.user.entity.Customer;
 import com.capgemini.ebugtracker.user.repositery.UserDao;
+import com.capgemini.ebugtracker.user.services.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -25,6 +26,8 @@ public class TicketController {
     private TicketService ticketService;
     @Autowired
     private UserDao userdao;
+    @Autowired
+    private UserService userservice;
     @Autowired
     public TicketController(final TicketService ticketService) {
         this.ticketService = ticketService;
@@ -64,15 +67,9 @@ TicketService.saveImage(imagefile);
     
     @PostMapping("/login")
     public StatusLogin loginUser(@Validated @RequestBody Customer customer) {
-        List<Customer> userlist = userdao.findAll();
-        for (Customer other : userlist) {
-            if (other.getUserid().equals(customer.getUsername()) && other.getPassword().equals(customer.getPassword())) {
-              //  staff.setLoggedIn(true);
-               // staffdao.save(staff);
-                return StatusLogin.SUCCESS;
-            }
-        }
-        return StatusLogin.FAILURE;
+    	return userservice.Login(customer);
+    	
+       
     }
     
     
