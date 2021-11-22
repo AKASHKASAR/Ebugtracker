@@ -1,6 +1,6 @@
 package com.capgemini.ebugtracker.staff.entity;
 
-public enum Status {
+public enum StatusLogin {
 
 	SUCCESS,
     USER_ALREADY_EXISTS,
