@@ -3,19 +3,31 @@ package com.capgemini.ebugtracker.user.controller;
 import com.capgemini.ebugtracker.bugs.entity.Bugs;
 import com.capgemini.ebugtracker.bugs.servies.TicketService;
 import com.capgemini.ebugtracker.exception.BugNotFoundException;
+import com.capgemini.ebugtracker.staff.entity.Staff;
+import com.capgemini.ebugtracker.staff.entity.StatusLogin;
+import com.capgemini.ebugtracker.staff.repositery.StaffDao;
+import com.capgemini.ebugtracker.user.entity.Customer;
+import com.capgemini.ebugtracker.user.repositery.UserDao;
+import com.capgemini.ebugtracker.user.services.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
+
+
 
 @RestController
 @RequestMapping("/tickets")
 public class TicketController {
  
     private TicketService ticketService;
-
+    @Autowired
+    private UserDao userdao;
+    @Autowired
+    private UserService userservice;
     @Autowired
     public TicketController(final TicketService ticketService) {
         this.ticketService = ticketService;
@@ -51,4 +63,15 @@ public class TicketController {
 TicketService.saveImage(imagefile);
         return returnvalue;
     }*/
+    
+    
+    @PostMapping("/login")
+    public StatusLogin loginUser(@Validated @RequestBody Customer customer) {
+    	return userservice.Login(customer);
+    	
+       
+    }
+    
+    
+    
 }

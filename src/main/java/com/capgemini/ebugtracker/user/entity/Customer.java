@@ -20,6 +20,7 @@ public class Customer {
 	private String fname;
 	private String lname;
 	private String emailid;
+	private String username;
 	private String password;
 	@OneToMany(targetEntity = Bugs.class,cascade = CascadeType.ALL)
 	@JoinColumn(name="Ticket",referencedColumnName = "userid")
@@ -59,6 +60,12 @@ public class Customer {
 	}
 	public void setBugs(List<Bugs> bugs) {
 		this.bugs = bugs;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
 	

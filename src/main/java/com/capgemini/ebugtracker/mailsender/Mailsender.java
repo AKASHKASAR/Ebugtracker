@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Service;
+
+@Service
 public class Mailsender {
 
-    private String sender_id="viajyalaxmi.joshi8@gmail.com";
+    private String sender_id="vijayalaxmi.joshi8@gmail.com";
     private String receiver_id;
     private String username;
     private String password;
