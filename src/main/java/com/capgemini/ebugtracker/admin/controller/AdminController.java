@@ -74,11 +74,10 @@ public class AdminController {
 
 
 			//Assign bug to staff
-			@PutMapping("/assignbug")
-			public String assignBug(@RequestBody Map < String, String > id ){
-				String bugid = id.get("bugid");
-				String staffid = id.get("staffid");
-				adminServices.assignBug(Long.parseLong(bugid), Long.parseLong(staffid));
+			@PutMapping("/assignbug/{bugid}/{staffid}")
+			public String assignBug(@PathVariable("bugid") Long bugid,@PathVariable("staffid") Long staffid ){
+				
+				adminServices.assignBug(bugid,staffid);
 				return "Bug is assigned to staff";
 //			
 		}

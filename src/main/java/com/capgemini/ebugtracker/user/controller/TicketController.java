@@ -47,7 +47,7 @@ public class TicketController {
     	return bugs;
     }
 
-    @GetMapping("/getTicketForStaff/{userId}")
+    @GetMapping("/getTicketForUser/{userId}")
     public Bugs getTicketsForStaff(@PathVariable String userId){
         return ticketService.getBugForUser(Long.parseLong(userId));
     }
