@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 import com.capgemini.ebugtracker.bugs.entity.Bugs;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Customer {
@@ -21,6 +22,7 @@ public class Customer {
 	private String lname;
 	private String emailid;
 	private String username;
+	@JsonIgnore
 	private String password;
 	@OneToMany(targetEntity = Bugs.class,cascade = CascadeType.ALL)
 	@JoinColumn(name="Ticket",referencedColumnName = "userid")

@@ -1,5 +1,6 @@
 package com.capgemini.ebugtracker.user.controller;
 import com.capgemini.ebugtracker.exception.BugNotFoundException;
+import com.capgemini.ebugtracker.exception.UserNotFoundException;
 import com.capgemini.ebugtracker.staff.entity.StatusLogin;
 import com.capgemini.ebugtracker.user.entity.Customer;
 import com.capgemini.ebugtracker.user.services.UserService;
@@ -31,7 +32,7 @@ public class UserController {
     public Customer getUser(@PathVariable("userId") String userId){
         Customer user = userService.getUser(Long.parseLong(userId));
         if(Objects.isNull(user)){
-            throw new BugNotFoundException();
+            throw new UserNotFoundException();
         }
         return user;
     }

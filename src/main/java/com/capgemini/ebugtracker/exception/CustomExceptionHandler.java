@@ -47,6 +47,13 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 				"Bug not found"), HttpStatus.NOT_FOUND);
 	}
 
+	@ExceptionHandler(UserNotFoundException.class)
+	public final ResponseEntity<Object> handleUserNotFoundException() {
+		LOG.error("User Not Found");
+		return new ResponseEntity<Object>(buildErrorMessge("USER_NOT_FOUND",
+				"User not found"), HttpStatus.NOT_FOUND);
+	}
+
 	@ExceptionHandler(Exception.class)
 	public final ResponseEntity<Object> handleException() {
 		LOG.error("Unknown Exception occurred");
