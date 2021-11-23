@@ -47,3 +47,5 @@ public class UserService {
 		}
 
 }
+
+//(Objects.nonNull(other.getUsername)

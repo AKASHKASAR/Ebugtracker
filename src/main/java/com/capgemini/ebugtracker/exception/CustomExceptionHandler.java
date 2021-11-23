@@ -54,12 +54,12 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 				"User not found"), HttpStatus.NOT_FOUND);
 	}
 
-	@ExceptionHandler(Exception.class)
-	public final ResponseEntity<Object> handleException() {
-		LOG.error("Unknown Exception occurred");
-		return new ResponseEntity<Object>(buildErrorMessge("INTERNAL_SERVER_ERROR",
-				"Something went wrong, please try after some time"), HttpStatus.INTERNAL_SERVER_ERROR);
-	}
+//	@ExceptionHandler(Exception.class)
+//	public final ResponseEntity<Object> handleException() {
+//		LOG.error("Unknown Exception occurred");
+//		return new ResponseEntity<Object>(buildErrorMessge("INTERNAL_SERVER_ERROR",
+//				"Something went wrong, please try after some time"), HttpStatus.INTERNAL_SERVER_ERROR);
+//	}
 
 	private ErrorMessge buildErrorMessge(String errorCode, String errorMessage){
 		ErrorMessge errorMessge = new ErrorMessge();

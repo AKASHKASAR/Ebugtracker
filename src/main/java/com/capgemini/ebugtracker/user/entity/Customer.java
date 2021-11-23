@@ -22,7 +22,7 @@ public class Customer {
 	private String lname;
 	private String emailid;
 	private String username;
-	@JsonIgnore
+//	@JsonIgnore
 	private String password;
 	@OneToMany(targetEntity = Bugs.class,cascade = CascadeType.ALL)
 	@JoinColumn(name="Ticket",referencedColumnName = "userid")
